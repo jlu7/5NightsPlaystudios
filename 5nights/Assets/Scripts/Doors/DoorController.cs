@@ -48,12 +48,12 @@ public class DoorController : MonoBehaviour {
 
 	public void doorSetOpen()
 	{
-		StartCoroutine (openTheDoor);
+		StartCoroutine (openTheDoor());
 	}
 
 	public void doorSetClosed()
 	{
-		StartCoroutine (closeTheDoor);
+		StartCoroutine (closeTheDoor());
 	}
 
 	IEnumerator openTheDoor() 
