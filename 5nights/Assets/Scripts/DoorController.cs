@@ -59,7 +59,7 @@ public class DoorController : MonoBehaviour {
 
 		do 
 		{
-			curPos = doorSpeed;
+			curPos += doorSpeed;
 
 			this.gameObject.GetComponent<Transform> ().localPosition.Set 
 			(
@@ -68,7 +68,7 @@ public class DoorController : MonoBehaviour {
 				openPos.localPosition.z
 			);
 
-		} while (curPos > );
+		} while (curPos < yOpenPOS);
 
 		is_Open = true;
 
@@ -80,13 +80,19 @@ public class DoorController : MonoBehaviour {
 		// close is < open
 
 		float curPos = yOpenPOS;
-		
+
+		do{
+
+			curPos -= doorSpeed;
+
 		this.gameObject.GetComponent<Transform> ().localPosition.Set 
 		(
 			closePos.localPosition.x, 
-			closePos.localPosition.y, 
+			curPos, 
 			closePos.localPosition.z
 		);
+
+		} (curPos > yClosePOS);
 
 		is_Open = false;
 
