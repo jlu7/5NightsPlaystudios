@@ -8,9 +8,9 @@ public class DoorController : MonoBehaviour {
 	public float xPOS;
 	public float yOpenPOS;
 	public float yClosePOS;
+	public  float doorSpeed;
 
 	protected bool is_Open;
-	protected float doorSpeed;
 
 	protected Transform openPos, closePos;
 
@@ -27,7 +27,7 @@ public class DoorController : MonoBehaviour {
 
 		is_Open = true;
 
-		doorSpeed = 5.0f;
+//		doorSpeed = 5.0f;
 
 		openPos.localPosition.Set (xPOS, yOpenPOS, 0);
 
@@ -92,7 +92,7 @@ public class DoorController : MonoBehaviour {
 			closePos.localPosition.z
 		);
 
-		} (curPos > yClosePOS);
+		} while (curPos > yClosePOS);
 
 		is_Open = false;
 
