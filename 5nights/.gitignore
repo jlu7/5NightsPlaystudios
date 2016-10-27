@@ -1,0 +1,21 @@
+# Ignore Directories
+Library
+Temp
+builds 
+obj
+bin
+
+# Ignore Files
+.DS_Store
+*.csproj
+*.sln
+*.unityproj
+*.DotSettings
+*.pyc
+*.pyc.meta
+*.suo
+*.swp
+*.user
+*.userprefs
+*.vsp
+LocalNetworkConfig.*
