@@ -9,17 +9,12 @@ public class HUD : MonoBehaviour
     public Text Night;
     public UsageBar UsageBarObj;
 
-	// Use this for initialization
-	void Start ()
-	{
+    public void Initialize(int nightNumber)
+    {
         Power = transform.Find("Power").GetComponent<Text>();
         Hour = transform.Find("Hour").GetComponent<Text>();
         Night = transform.Find("Night").GetComponent<Text>();
-	    UsageBarObj = transform.Find("Usage").GetComponent<UsageBar>();
-	}
-
-    public void Initialize(int nightNumber)
-    {
+        UsageBarObj = transform.Find("Usage").GetComponent<UsageBar>();
         UpdatePowerText(100);
         UpdateHourText(12);
         Night.text = "Night " + nightNumber;

@@ -13,6 +13,8 @@ public class TitlePage : MonoBehaviour {
 
     void StartGame()
     {
-        ViewController.GetInstance().PushView(Instantiate(Resources.Load<GameObject>("Prefabs/Views/MainGame")));
+        GameObject mainGame = Instantiate(Resources.Load<GameObject>("Prefabs/Views/MainGame"));
+        mainGame.GetComponent<MainGame>().Initialize(1);
+        ViewController.GetInstance().PushView(mainGame);
     }
 }

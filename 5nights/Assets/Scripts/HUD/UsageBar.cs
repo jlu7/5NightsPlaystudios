@@ -4,7 +4,7 @@ using System.Collections;
 
 public class UsageBar : MonoBehaviour
 {
-    private List<GameObject> EnergyBarList; 
+    private List<GameObject> EnergyBarList = new List<GameObject>(); 
 
     public void UpdateUsageBar(int amount)
     {
