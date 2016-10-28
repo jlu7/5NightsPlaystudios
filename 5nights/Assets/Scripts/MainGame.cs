@@ -15,6 +15,7 @@ public class MainGame : MonoBehaviour
 	// Use this for initialization
 	public void Initialize(int level) 
     {
+        SoundController.GetInstance().StopSound("Theme");
 		GameObject securityCamsPrefab = Resources.Load("Prefabs/Views/SecurityCameras") as GameObject;
 		SecurityCameras = GameObject.Instantiate<GameObject>(securityCamsPrefab).GetComponent<SecurityCamController>();
 		SecurityCameras.transform.parent = this.transform;
@@ -42,9 +43,17 @@ public class MainGame : MonoBehaviour
 	        }
 	    }
 
-        SoundController.GetInstance().Play("A_C", true);
-        SoundController.GetInstance().Play("WelcomeCall");
+        SoundController.GetInstance().Play("A_C", true, .2f);
+
 	    StartCoroutine(Time());
+	    StartCoroutine(CallIn());
+    }
+
+    private IEnumerator CallIn()
+    {
+        SoundController.GetInstance().Play("PhoneRing");
+        yield return new WaitForSeconds(7f);
+        SoundController.GetInstance().Play("WelcomeCall");
     }
 	
 	IEnumerator ChangeCam()
@@ -148,7 +157,9 @@ public class MainGame : MonoBehaviour
             chara.Active = false;
         }
 
-        yield return new WaitForSeconds(2f);
+        this.transform.Find("HUD/WinScreen").gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(10f);
         SceneManager.LoadScene("5nights");
     }
 

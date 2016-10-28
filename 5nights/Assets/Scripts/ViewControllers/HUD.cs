@@ -82,6 +82,10 @@ public class HUD : MonoBehaviour
             MiniMap.SetActive(SecurityCamerasActive);
             LeftDoorButton.SetActive(!SecurityCamerasActive);
             RightDoorButton.SetActive(!SecurityCamerasActive);
+            LeftProtection = true;
+            RightProtection = true;
+            LeftProtectionButtonAction(false);
+            RightProtectionButtonAction(false);
             foreach (GameObject model in Models)
             {
                 model.SetActive(!SecurityCamerasActive);
@@ -100,7 +104,7 @@ public class HUD : MonoBehaviour
         }
     }
 
-    public void LeftProtectionButtonAction()
+    public void LeftProtectionButtonAction(bool playSound = true)
     {
         if (!LockOutFlag)
         {
@@ -108,10 +112,18 @@ public class HUD : MonoBehaviour
             if (LeftProtection)
             {
                 LeftDoor.GetComponent<Animator>().Play("DoorClose");
+                if (playSound)
+                {
+                    SoundController.GetInstance().Play("DoorClose");
+                }
             }
             else
             {
                 LeftDoor.GetComponent<Animator>().Play("DoorOpen");
+                if (playSound)
+                {
+                    SoundController.GetInstance().Play("DoorOpen");
+                }
             }
             Debug.Log(LeftProtection);
         }
@@ -121,7 +133,7 @@ public class HUD : MonoBehaviour
         }
     }
 
-    public void RightProtectionButtonAction()
+    public void RightProtectionButtonAction(bool PlaySound = true)
     {
         if (!LockOutFlag)
         {
@@ -129,10 +141,18 @@ public class HUD : MonoBehaviour
             if (RightProtection)
             {
                 RightDoor.GetComponent<Animator>().Play("DoorClose");
+                if (PlaySound)
+                {
+                    SoundController.GetInstance().Play("DoorClose");
+                }
             }
             else
             {
                 RightDoor.GetComponent<Animator>().Play("DoorOpen");
+                if (PlaySound)
+                {
+                    SoundController.GetInstance().Play("DoorOpen");
+                }
             }
             Debug.Log(RightProtection);
         }
