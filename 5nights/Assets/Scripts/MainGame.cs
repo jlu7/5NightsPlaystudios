@@ -38,7 +38,7 @@ public class MainGame : MonoBehaviour
 	    }
 
         SoundController.GetInstance().Play("A_C", true);
-
+        SoundController.GetInstance().Play("WelcomeCall");
 	    StartCoroutine(Time());
     }
 	
