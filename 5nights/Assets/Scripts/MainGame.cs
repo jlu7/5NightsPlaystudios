@@ -6,6 +6,7 @@ public class MainGame : MonoBehaviour
 {
 	SecurityCamController SecurityCameras;
     HUD HUDController;
+    private List<Character> Characters = new List<Character>(); 
 
     public float PowerAmount = 100;
 
@@ -15,17 +16,20 @@ public class MainGame : MonoBehaviour
 		GameObject securityCamsPrefab = Resources.Load("Prefabs/Views/SecurityCameras") as GameObject;
 		SecurityCameras = GameObject.Instantiate<GameObject>(securityCamsPrefab).GetComponent<SecurityCamController>();
 		SecurityCameras.transform.parent = this.transform;
-		SecurityCameras.SetSecurityCam(0);
-		//StartCoroutine(ChangeCam());
+		SecurityCameras.Initialize();
+        Characters.Add(this.transform.Find("Mitzy").GetComponent<Mitzy>());
 
 	    if (level == 1)
 	    {
 	        HUDController = transform.Find("HUD").GetComponent<HUD>();
             HUDController.Initialize(1, SecurityCameras);
+            foreach (Character chara in Characters)
+	        {
+	            chara.Initialize(HUDController, SecurityCameras);
+	        }
 	    }
 
 	    StartCoroutine(Time());
-	    //SecurityCameras.transform.Find("SecurityCamView").gameObject.SetActive(true);
     }
 	
 	IEnumerator ChangeCam()
@@ -45,18 +49,23 @@ public class MainGame : MonoBehaviour
 		StartCoroutine(ChangeCam());
 	}
 
-
     protected IEnumerator Time()
     {
         float Hour = 0;
+
+        foreach (Character chara in Characters)
+        {
+            StartCoroutine(chara.Logic());
+        }
+
         while (true)
         {
+            int EnergyUsage = 0;
+
             if (Hour <= 6f)
             {
-                Hour += .001f;
+                Hour += .0001f;
             }
-
-            int EnergyUsage = 0;
 
             if (HUDController.SecurityCamerasActive)
             {

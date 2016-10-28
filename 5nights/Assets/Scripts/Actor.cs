@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
-public class Actor : MonoBehaviour {
-
+public class Actor : MonoBehaviour 
+{
 	public enum ActorType
 	{
 		MITZI,
@@ -12,12 +12,8 @@ public class Actor : MonoBehaviour {
 	public ActorType ActiveActor;
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+    {
 		ActiveActor = ActorType.MITZI;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 }

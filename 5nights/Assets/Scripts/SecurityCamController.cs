@@ -20,9 +20,14 @@ public class SecurityCamController : MonoBehaviour
 		{
 			cam.SetActive(false);
 		}
-
-	
 	}
+
+    public void Initialize()
+    {
+        SetSecurityCam(0);
+        SecurityCameraArr[0].GetComponent<SecurityCamView>().AddActor(Actor.ActorType.MITZI);
+        SecurityCameraArr[0].GetComponent<SecurityCamView>().AddActor(Actor.ActorType.BOB);
+    }
 
 	public void SetSecurityCam(int cameraNumber)
 	{
@@ -35,4 +40,14 @@ public class SecurityCamController : MonoBehaviour
 		SecurityCameraArr[ActiveCam].SetActive(true);
 		ActiveCameraChanged(cameraNumber);
 	}
+
+    public void MoveCharacter(Actor.ActorType actor, int toPosition)
+    {
+        foreach (GameObject camera in SecurityCameraArr)
+        {
+            camera.GetComponent<SecurityCamView>().RemoveActor(actor);
+        }
+
+        SecurityCameraArr[toPosition].GetComponent<SecurityCamView>().AddActor(actor);
+    }
 }

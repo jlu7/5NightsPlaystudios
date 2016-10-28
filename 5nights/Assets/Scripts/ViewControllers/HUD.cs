@@ -57,8 +57,6 @@ public class HUD : MonoBehaviour
         SecurityCamerasActive = !SecurityCamerasActive;
         SecurityCameras.gameObject.SetActive(SecurityCamerasActive);
         
-        Debug.Log(SecurityCameras.gameObject.activeSelf);
-
         MiniMap.SetActive(SecurityCamerasActive);
     }
 }
