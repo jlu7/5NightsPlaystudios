@@ -5,7 +5,9 @@ using System.Collections.Generic;
 public class MainGame : MonoBehaviour 
 {
 	SecurityCamController SecurityCameras;
+    HUD HUDController;
 
+    public float PowerAmount = 100;
 
 	// Use this for initialization
 	public void Initialize(int level) 
@@ -18,10 +20,13 @@ public class MainGame : MonoBehaviour
 
 	    if (level == 1)
 	    {
-            transform.Find("HUD").GetComponent<HUD>().Initialize(1, SecurityCameras);
+	        HUDController = transform.Find("HUD").GetComponent<HUD>();
+            HUDController.Initialize(1, SecurityCameras);
 	    }
-		//SecurityCameras.transform.Find("SecurityCamView").gameObject.SetActive(true);
-	}
+
+	    StartCoroutine(Time());
+	    //SecurityCameras.transform.Find("SecurityCamView").gameObject.SetActive(true);
+    }
 	
 	IEnumerator ChangeCam()
 	{
@@ -39,4 +44,31 @@ public class MainGame : MonoBehaviour
 		
 		StartCoroutine(ChangeCam());
 	}
+
+
+    protected IEnumerator Time()
+    {
+        float Hour = 0;
+        while (true)
+        {
+            if (Hour <= 6f)
+            {
+                Hour += .001f;
+            }
+
+            int EnergyUsage = 0;
+
+            if (HUDController.SecurityCamerasActive)
+            {
+                EnergyUsage += 2;
+                PowerAmount = PowerAmount - 0.01f;
+            }
+
+            HUDController.UpdatePowerText((int)PowerAmount);
+            HUDController.UpdateHourText((int)Hour);
+            HUDController.UsageBarObj.UpdateUsageBar(EnergyUsage);
+
+            yield return new WaitForEndOfFrame();
+        }
+    }
 }

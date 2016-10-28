@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Linq;
 
@@ -8,7 +8,6 @@ public class SecurityCamView : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		AddActor(Actor.ActorType.MITZI);
 	}
 
 	public void AddActor(Actor.ActorType actorType)

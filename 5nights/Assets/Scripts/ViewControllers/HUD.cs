@@ -10,10 +10,11 @@ public class HUD : MonoBehaviour
     public UsageBar UsageBarObj;
     public GameObject MiniMap;
     public Button CameraSwitch;
+    public bool SecurityCamerasActive = false;
+
 
     private SecurityCamController SecurityCameras;
 
-    protected bool SecurityCamerasActive = false;
 
     public void Initialize(int nightNumber, SecurityCamController securityCameras)
     {
@@ -41,7 +42,14 @@ public class HUD : MonoBehaviour
 
     public void UpdateHourText(int timeTo)
     {
-        Hour.text = timeTo + " AM";
+        if (timeTo == 0)
+        {
+            Hour.text = 12 + " AM";
+        }
+        else
+        {
+            Hour.text = timeTo + " AM";
+        }
     }
 
     public void ToggleCameraView()
@@ -50,7 +58,7 @@ public class HUD : MonoBehaviour
         SecurityCameras.gameObject.SetActive(SecurityCamerasActive);
         
         Debug.Log(SecurityCameras.gameObject.activeSelf);
-        MiniMap.SetActive(SecurityCamerasActive);
 
+        MiniMap.SetActive(SecurityCamerasActive);
     }
 }

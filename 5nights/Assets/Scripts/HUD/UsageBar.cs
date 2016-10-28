@@ -14,12 +14,12 @@ public class UsageBar : MonoBehaviour
         }
 
         EnergyBarList.Clear();
-        Debug.Log(amount);
 
         for (int i = 0; i < amount; i++)
         {
             GameObject tmp = Instantiate(Resources.Load<GameObject>("Prefabs/UI/EnergyBar"));
             tmp.transform.parent = this.transform;
+            tmp.GetComponent<RectTransform>().localPosition = new Vector3((i * 25), 0);
             EnergyBarList.Add(tmp);
         }
     }
