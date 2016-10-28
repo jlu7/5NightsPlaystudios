@@ -83,7 +83,7 @@ public class Mitzy : Character
             }
             MitzyCurrentPos = MitzyCurrentPos.ConnectingNodes[targetNum];
             Debug.Log(MitzyCurrentPos.Position);
-            SecurityCamController.MoveCharacter(Actor.ActorType.MITZI, MitzyCurrentPos.Position);
+            SecurityCamController.MoveCharacter(ThisActor, MitzyCurrentPos.Position);
         }
     }
 }

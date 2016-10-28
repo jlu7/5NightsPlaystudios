@@ -14,6 +14,5 @@ public class Actor : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
-		ActiveActor = ActorType.MITZI;
 	}
 }

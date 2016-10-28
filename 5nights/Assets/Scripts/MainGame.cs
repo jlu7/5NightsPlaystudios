@@ -18,6 +18,7 @@ public class MainGame : MonoBehaviour
 		SecurityCameras.transform.parent = this.transform;
 		SecurityCameras.Initialize();
         Characters.Add(this.transform.Find("Mitzy").GetComponent<Mitzy>());
+        Characters.Add(this.transform.Find("Bob").GetComponent<Bob>());
 
 	    if (level == 1)
 	    {
