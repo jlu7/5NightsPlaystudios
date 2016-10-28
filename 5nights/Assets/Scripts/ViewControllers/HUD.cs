@@ -9,8 +9,15 @@ public class HUD : MonoBehaviour
     public Text Night;
     public UsageBar UsageBarObj;
     public GameObject MiniMap;
+    public GameObject LeftDoorButton;
+    public GameObject RightDoorButton;
+
     public Button CameraSwitch;
     public bool SecurityCamerasActive = false;
+    private bool LockOutFlag = false;
+
+    public bool LeftProtection = false;
+    public bool RightProtection = false;
 
 
     private SecurityCamController SecurityCameras;
@@ -25,6 +32,12 @@ public class HUD : MonoBehaviour
         UpdatePowerText(100);
         UpdateHourText(12);
         MiniMap = transform.Find("MiniMap").gameObject;
+        LeftDoorButton = transform.Find("LeftDoor").gameObject;
+        RightDoorButton = transform.Find("RightDoor").gameObject;
+
+        LeftDoorButton.GetComponent<Button>().onClick.AddListener(() => LeftProtectionButtonAction());
+        RightDoorButton.GetComponent<Button>().onClick.AddListener(() => RightProtectionButtonAction());
+        
         Night.text = "Night " + nightNumber;
         UsageBarObj.UpdateUsageBar(0);
 
@@ -54,9 +67,55 @@ public class HUD : MonoBehaviour
 
     public void ToggleCameraView()
     {
-        SecurityCamerasActive = !SecurityCamerasActive;
-        SecurityCameras.gameObject.SetActive(SecurityCamerasActive);
+        if (!LockOutFlag)
+        {
+            SecurityCamerasActive = !SecurityCamerasActive;
+            SecurityCameras.gameObject.SetActive(SecurityCamerasActive);
         
-        MiniMap.SetActive(SecurityCamerasActive);
+            MiniMap.SetActive(SecurityCamerasActive);
+            LeftDoorButton.SetActive(!SecurityCamerasActive);
+            RightDoorButton.SetActive(!SecurityCamerasActive);
+        }
+        else
+        {
+            SecurityCameras.gameObject.SetActive(false);
+            MiniMap.SetActive(false);
+            LeftDoorButton.SetActive(false);
+            RightDoorButton.SetActive(false);
+        }
+    }
+
+    public void LeftProtectionButtonAction()
+    {
+        if (!LockOutFlag)
+        {
+            LeftProtection = !LeftProtection;
+            Debug.Log(LeftProtection);
+        }
+        else
+        {
+            LeftProtection = false;
+        }
+    }
+
+    public void RightProtectionButtonAction()
+    {
+        if (!LockOutFlag)
+        {
+            RightProtection = !RightProtection;
+            Debug.Log(RightProtection);
+        }
+        else
+        {
+            RightProtection = false;
+        }
+    }
+
+    public void LockOut()
+    {
+        LockOutFlag = true;
+        ToggleCameraView();
+        RightProtectionButtonAction();
+        LeftProtectionButtonAction();
     }
 }

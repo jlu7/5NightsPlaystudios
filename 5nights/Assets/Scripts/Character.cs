@@ -10,7 +10,6 @@ public abstract class Character : MonoBehaviour
     protected HUD HudController;
     protected SecurityCamController SecurityCamController;
 
-
     public abstract void Initialize(HUD hudController, SecurityCamController securityCam);
 
     public abstract IEnumerator Logic();

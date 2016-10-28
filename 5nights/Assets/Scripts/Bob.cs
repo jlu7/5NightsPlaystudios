@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 using Random = System.Random;
 
 public class Bob : Character
@@ -32,7 +33,7 @@ public class Bob : Character
         pos3.ConnectingNodes.Add(pos5);
 
         pos5.ConnectingNodes.Add(pos3);
-        pos5.ConnectingNodes.Add(pos6);
+        //pos5.ConnectingNodes.Add(pos6);
 
         pos6.ConnectingNodes.Add(pos5);
 
@@ -77,6 +78,16 @@ public class Bob : Character
     void BobMove()
     {
         int diceRoll = UnityEngine.Random.Range(0, 115);
+
+        if (BobCurrentPos.Position == 6)
+        {
+            diceRoll = UnityEngine.Random.Range(0, 90);
+            if (!HudController.RightProtection)
+            {
+                StartCoroutine(GameOver());
+            }
+        }
+
         if (diceRoll > 100)
         {
             //Stand Still!
@@ -84,6 +95,7 @@ public class Bob : Character
         else
         {
             int targetNum = diceRoll % BobCurrentPos.ConnectingNodes.Count;
+
             if (HudController.SecurityCamerasActive && SecurityCamController.ActiveCam == BobCurrentPos.ConnectingNodes[targetNum].Position)
             {
                 targetNum = (diceRoll + 1) % BobCurrentPos.ConnectingNodes.Count;
@@ -92,5 +104,12 @@ public class Bob : Character
             Debug.Log(BobCurrentPos.Position);
             SecurityCamController.MoveCharacter(ThisActor, BobCurrentPos.Position);
         }
+    }
+
+    private IEnumerator GameOver()
+    {
+        HudController.LockOut();
+        yield return new WaitForSeconds(1.0f);
+        SceneManager.LoadScene("5nights");
     }
 }

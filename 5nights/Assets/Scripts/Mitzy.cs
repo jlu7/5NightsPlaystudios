@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 using Random = System.Random;
 
 public class Mitzy : Character
@@ -31,7 +32,7 @@ public class Mitzy : Character
         pos2.ConnectingNodes.Add(pos1);
 
         pos4.ConnectingNodes.Add(pos1);
-        pos4.ConnectingNodes.Add(pos6);
+        //pos4.ConnectingNodes.Add(pos6);
 
         pos6.ConnectingNodes.Add(pos4);
 
@@ -70,6 +71,16 @@ public class Mitzy : Character
     void MitzyMove()
     {
         int diceRoll = UnityEngine.Random.Range(0, 115);
+
+        if (MitzyCurrentPos.Position == 6)
+        {
+            diceRoll = UnityEngine.Random.Range(0, 90);
+            if (!HudController.LeftProtection)
+            {
+                StartCoroutine(GameOver());
+            }
+        }
+
         if (diceRoll > 100)
         {
             //Stand Still!
@@ -77,6 +88,7 @@ public class Mitzy : Character
         else
         {
             int targetNum = diceRoll % MitzyCurrentPos.ConnectingNodes.Count;
+
             if (HudController.SecurityCamerasActive && SecurityCamController.ActiveCam == MitzyCurrentPos.ConnectingNodes[targetNum].Position)
             {
                 targetNum = (diceRoll + 1) % MitzyCurrentPos.ConnectingNodes.Count;
@@ -85,5 +97,12 @@ public class Mitzy : Character
             Debug.Log(MitzyCurrentPos.Position);
             SecurityCamController.MoveCharacter(ThisActor, MitzyCurrentPos.Position);
         }
+    }
+
+    private IEnumerator GameOver()
+    {
+        HudController.LockOut();
+        yield return new WaitForSeconds(1.0f);
+        SceneManager.LoadScene("5nights");
     }
 }

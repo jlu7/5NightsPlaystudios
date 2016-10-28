@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class MainGame : MonoBehaviour 
 {
@@ -65,20 +66,51 @@ public class MainGame : MonoBehaviour
 
             if (Hour <= 6f)
             {
-                Hour += .0001f;
+                Hour += .0003f;
+            }
+            else
+            {
+                break;
             }
 
             if (HUDController.SecurityCamerasActive)
             {
                 EnergyUsage += 2;
-                PowerAmount = PowerAmount - 0.01f;
+                if (PowerAmount > 0)
+                {
+                    PowerAmount = PowerAmount - 0.01f;
+                }
+            }
+
+            if (HUDController.LeftProtection || HUDController.RightProtection)
+            {
+                EnergyUsage += 2;
+                if (PowerAmount > 0)
+                {
+                    PowerAmount = PowerAmount - 0.01f;
+                }
             }
 
             HUDController.UpdatePowerText((int)PowerAmount);
+
+            if (PowerAmount <= 0)
+            {
+                HUDController.UpdatePowerText(0);                
+                HUDController.LockOut();
+            }
+
             HUDController.UpdateHourText((int)Hour);
             HUDController.UsageBarObj.UpdateUsageBar(EnergyUsage);
 
             yield return new WaitForEndOfFrame();
         }
+
+        foreach (Character chara in Characters)
+        {
+            chara.Active = false;
+        }
+
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene("5nights");
     }
 }
