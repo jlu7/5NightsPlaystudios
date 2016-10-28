@@ -8,8 +8,14 @@ public class HUD : MonoBehaviour
     public Text Hour;
     public Text Night;
     public UsageBar UsageBarObj;
+    public GameObject MiniMap;
+    public Button CameraSwitch;
 
-    public void Initialize(int nightNumber)
+    private SecurityCamController SecurityCameras;
+
+    protected bool SecurityCamerasActive = false;
+
+    public void Initialize(int nightNumber, SecurityCamController securityCameras)
     {
         Power = transform.Find("Power").GetComponent<Text>();
         Hour = transform.Find("Hour").GetComponent<Text>();
@@ -17,8 +23,15 @@ public class HUD : MonoBehaviour
         UsageBarObj = transform.Find("Usage").GetComponent<UsageBar>();
         UpdatePowerText(100);
         UpdateHourText(12);
+        MiniMap = transform.Find("MiniMap").gameObject;
         Night.text = "Night " + nightNumber;
         UsageBarObj.UpdateUsageBar(0);
+
+        SecurityCameras = securityCameras;
+        MiniMap.SetActive(SecurityCamerasActive);
+        securityCameras.gameObject.SetActive(SecurityCamerasActive);
+        CameraSwitch = transform.Find("CameraSwitch").GetComponent<Button>();
+        CameraSwitch.onClick.AddListener(() => ToggleCameraView());
     }
 
     public void UpdatePowerText(int powerTo)
@@ -29,5 +42,15 @@ public class HUD : MonoBehaviour
     public void UpdateHourText(int timeTo)
     {
         Hour.text = timeTo + " AM";
+    }
+
+    public void ToggleCameraView()
+    {
+        SecurityCamerasActive = !SecurityCamerasActive;
+        SecurityCameras.gameObject.SetActive(SecurityCamerasActive);
+        
+        Debug.Log(SecurityCameras.gameObject.activeSelf);
+        MiniMap.SetActive(SecurityCamerasActive);
+
     }
 }

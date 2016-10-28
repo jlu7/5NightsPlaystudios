@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
 public class MainGame : MonoBehaviour 
 {
 	SecurityCamController SecurityCameras;
+
 
 	// Use this for initialization
 	public void Initialize(int level) 
@@ -17,7 +18,7 @@ public class MainGame : MonoBehaviour
 
 	    if (level == 1)
 	    {
-	        transform.Find("HUD").GetComponent<HUD>().Initialize(1);
+            transform.Find("HUD").GetComponent<HUD>().Initialize(1, SecurityCameras);
 	    }
 		//SecurityCameras.transform.Find("SecurityCamView").gameObject.SetActive(true);
 	}

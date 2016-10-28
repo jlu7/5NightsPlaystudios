@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class SecurityCamController : MonoBehaviour
@@ -26,8 +26,11 @@ public class SecurityCamController : MonoBehaviour
 
 	public void SetSecurityCam(int cameraNumber)
 	{
-		if(null != SecurityCameraArr[ActiveCam])
-			SecurityCameraArr[ActiveCam].SetActive(false);
+	    if (null != SecurityCameraArr[ActiveCam])
+	    {
+            SecurityCameraArr[ActiveCam].SetActive(false);
+	    }
+
 		ActiveCam = cameraNumber;
 		SecurityCameraArr[ActiveCam].SetActive(true);
 		ActiveCameraChanged(cameraNumber);
