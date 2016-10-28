@@ -52,7 +52,7 @@ GameObject:
   - 20: {fileID: 20000013014591224}
   - 124: {fileID: 124000010463940736}
   - 92: {fileID: 92000014041197922}
-  - 81: {fileID: 81000013498246422}
+  - 114: {fileID: 114000011843792654}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -150,7 +150,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010516861316}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -194,13 +194,6 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
---- !u!81 &81000013498246422
-AudioListener:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010904746778}
-  m_Enabled: 1
 --- !u!92 &92000014041197922
 Behaviour:
   m_ObjectHideFlags: 1
@@ -208,6 +201,32 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010904746778}
   m_Enabled: 1
+--- !u!114 &114000011843792654
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010904746778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9191284b058eef549b7108b5f04e1117, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  intensityMultiplier: 1.64
+  generalIntensity: 0.27
+  blackIntensity: 1
+  whiteIntensity: 1
+  midGrey: 0.339
+  dx11Grain: 0
+  softness: 0
+  monochrome: 0
+  intensities: {x: 0.5588235, y: 0.5588235, z: 0.5588235}
+  tiling: {x: 64, y: 64, z: 64}
+  monochromeTiling: 64
+  filterMode: 1
+  noiseTexture: {fileID: 2800000, guid: 7a632f967e8ad42f5bd275898151ab6a, type: 3}
+  noiseShader: {fileID: 4800000, guid: b0249d8c935344451aa4de6db76f0688, type: 3}
+  dx11NoiseShader: {fileID: 4800000, guid: 8b30686bb4322ab42ad5eb50a0210b58, type: 3}
 --- !u!124 &124000010463940736
 Behaviour:
   m_ObjectHideFlags: 1
