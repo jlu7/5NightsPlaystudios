@@ -22,6 +22,11 @@ public class MainGame : MonoBehaviour
         Characters.Add(this.transform.Find("Mitzy").GetComponent<Mitzy>());
         Characters.Add(this.transform.Find("Bob").GetComponent<Bob>());
 
+        List<GameObject> tmp = new List<GameObject>();
+        tmp.Add(this.transform.Find("Mitzy/char_lola").gameObject);
+        tmp.Add(this.transform.Find("Bob/char_bob").gameObject);
+        tmp.Add(this.transform.Find("base_room").gameObject);
+
         RandomSounds.Add("Growl");
         RandomSounds.Add("Jackpot");
         RandomSounds.Add("ShatteredGlass");
@@ -30,7 +35,7 @@ public class MainGame : MonoBehaviour
 	    if (level == 1)
 	    {
 	        HUDController = transform.Find("HUD").GetComponent<HUD>();
-            HUDController.Initialize(1, SecurityCameras);
+            HUDController.Initialize(1, SecurityCameras, tmp);
             foreach (Character chara in Characters)
 	        {
 	            chara.Initialize(HUDController, SecurityCameras);

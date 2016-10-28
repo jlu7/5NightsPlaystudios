@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
@@ -13,6 +14,7 @@ public class HUD : MonoBehaviour
     public GameObject RightDoorButton;
 
     public Button CameraSwitch;
+    public List<GameObject> Models = new List<GameObject>(); 
     public bool SecurityCamerasActive = false;
     private bool LockOutFlag = false;
 
@@ -23,7 +25,7 @@ public class HUD : MonoBehaviour
     private SecurityCamController SecurityCameras;
 
 
-    public void Initialize(int nightNumber, SecurityCamController securityCameras)
+    public void Initialize(int nightNumber, SecurityCamController securityCameras, List<GameObject> models)
     {
         Power = transform.Find("Power").GetComponent<Text>();
         Hour = transform.Find("Hour").GetComponent<Text>();
@@ -34,6 +36,7 @@ public class HUD : MonoBehaviour
         MiniMap = transform.Find("MiniMap").gameObject;
         LeftDoorButton = transform.Find("LeftDoor").gameObject;
         RightDoorButton = transform.Find("RightDoor").gameObject;
+        Models = models;
 
         LeftDoorButton.GetComponent<Button>().onClick.AddListener(() => LeftProtectionButtonAction());
         RightDoorButton.GetComponent<Button>().onClick.AddListener(() => RightProtectionButtonAction());
@@ -75,11 +78,19 @@ public class HUD : MonoBehaviour
             MiniMap.SetActive(SecurityCamerasActive);
             LeftDoorButton.SetActive(!SecurityCamerasActive);
             RightDoorButton.SetActive(!SecurityCamerasActive);
+            foreach (GameObject model in Models)
+            {
+                model.SetActive(!SecurityCamerasActive);
+            }
         }
         else
         {
             SecurityCameras.gameObject.SetActive(false);
             MiniMap.SetActive(false);
+            foreach (GameObject model in Models)
+            {
+                model.SetActive(true);
+            }
             LeftDoorButton.SetActive(false);
             RightDoorButton.SetActive(false);
         }
