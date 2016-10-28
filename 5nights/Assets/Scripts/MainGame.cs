@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -13,7 +13,7 @@ public class MainGame : MonoBehaviour
 		SecurityCameras = GameObject.Instantiate<GameObject>(securityCamsPrefab).GetComponent<SecurityCamController>();
 		SecurityCameras.transform.parent = this.transform;
 		SecurityCameras.SetSecurityCam(0);
-		StartCoroutine(ChangeCam());
+		//StartCoroutine(ChangeCam());
 
 	    if (level == 1)
 	    {

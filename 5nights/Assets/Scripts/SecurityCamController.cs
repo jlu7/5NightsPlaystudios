@@ -6,6 +6,8 @@ public class SecurityCamController : MonoBehaviour
 	public delegate void CameraChange(int activeCamera);
 	public static event CameraChange ActiveCameraChanged = (int ac) => { };
 
+	public static SecurityCamController SinglePoop;
+
 
 	public int ActiveCam;
 	public GameObject[] SecurityCameraArr; 
@@ -13,6 +15,7 @@ public class SecurityCamController : MonoBehaviour
 	// Use this for initialization
 	void Awake ()
 	{
+		SinglePoop = this;
 		foreach(GameObject cam in SecurityCameraArr)
 		{
 			cam.SetActive(false);

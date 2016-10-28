@@ -18,6 +18,11 @@ public class MiniMap : MonoBehaviour {
 			ActiveRoom = activeCam;
 			RoomSprites[ActiveRoom].GetComponent<Image>().color = Color.green;
 		};
+		for(int i = 0; i < RoomSprites.Length; i++)
+		{
+			int count = i;
+			RoomSprites[i].GetComponent<Button>().onClick.AddListener(() => SecurityCamController.SinglePoop.SetSecurityCam(count));
+		}
 	}
 
 
