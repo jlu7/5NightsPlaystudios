@@ -17,29 +17,29 @@ public class Mitzy : Character
         Map pos0 = new Map(0);
         Map pos1 = new Map(1);
         Map pos2 = new Map(2);
-        Map pos5 = new Map(5);
-        Map pos7 = new Map(7);
+        Map pos4 = new Map(4);
+        Map pos6 = new Map(6);
 
         pos0.ConnectingNodes.Add(pos1);
         pos0.ConnectingNodes.Add(pos2);
 
         pos1.ConnectingNodes.Add(pos0);
         pos1.ConnectingNodes.Add(pos2);
-        pos1.ConnectingNodes.Add(pos5);
+        pos1.ConnectingNodes.Add(pos4);
 
         pos2.ConnectingNodes.Add(pos0);
         pos2.ConnectingNodes.Add(pos1);
 
-        pos5.ConnectingNodes.Add(pos1);
-        pos5.ConnectingNodes.Add(pos7);
+        pos4.ConnectingNodes.Add(pos1);
+        pos4.ConnectingNodes.Add(pos6);
 
-        pos7.ConnectingNodes.Add(pos5);
+        pos6.ConnectingNodes.Add(pos4);
 
         MitzyMap.Add(pos0);
         MitzyMap.Add(pos1);
         MitzyMap.Add(pos2);
-        MitzyMap.Add(pos5);
-        MitzyMap.Add(pos7);
+        MitzyMap.Add(pos4);
+        MitzyMap.Add(pos6);
 
         MitzyCurrentPos = pos0;
     }

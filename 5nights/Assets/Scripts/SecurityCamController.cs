@@ -48,6 +48,9 @@ public class SecurityCamController : MonoBehaviour
             camera.GetComponent<SecurityCamView>().RemoveActor(actor);
         }
 
-        SecurityCameraArr[toPosition].GetComponent<SecurityCamView>().AddActor(actor);
+        if (toPosition != 6)
+        {
+            SecurityCameraArr[toPosition].GetComponent<SecurityCamView>().AddActor(actor);
+        }
     }
 }
