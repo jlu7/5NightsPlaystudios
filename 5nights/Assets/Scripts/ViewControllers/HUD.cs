@@ -12,6 +12,8 @@ public class HUD : MonoBehaviour
     public GameObject MiniMap;
     public GameObject LeftDoorButton;
     public GameObject RightDoorButton;
+    public GameObject LeftDoor;
+    public GameObject RightDoor;
 
     public Button CameraSwitch;
     public List<GameObject> Models = new List<GameObject>(); 
@@ -25,7 +27,7 @@ public class HUD : MonoBehaviour
     private SecurityCamController SecurityCameras;
 
 
-    public void Initialize(int nightNumber, SecurityCamController securityCameras, List<GameObject> models)
+    public void Initialize(int nightNumber, SecurityCamController securityCameras, List<GameObject> models, GameObject leftDoor, GameObject rightDoor)
     {
         Power = transform.Find("Power").GetComponent<Text>();
         Hour = transform.Find("Hour").GetComponent<Text>();
@@ -37,6 +39,8 @@ public class HUD : MonoBehaviour
         LeftDoorButton = transform.Find("LeftDoor").gameObject;
         RightDoorButton = transform.Find("RightDoor").gameObject;
         Models = models;
+        LeftDoor = leftDoor;
+        RightDoor = rightDoor;
 
         LeftDoorButton.GetComponent<Button>().onClick.AddListener(() => LeftProtectionButtonAction());
         RightDoorButton.GetComponent<Button>().onClick.AddListener(() => RightProtectionButtonAction());
@@ -101,6 +105,14 @@ public class HUD : MonoBehaviour
         if (!LockOutFlag)
         {
             LeftProtection = !LeftProtection;
+            if (LeftProtection)
+            {
+                LeftDoor.GetComponent<Animator>().Play("DoorClose");
+            }
+            else
+            {
+                LeftDoor.GetComponent<Animator>().Play("DoorOpen");
+            }
             Debug.Log(LeftProtection);
         }
         else
@@ -114,6 +126,14 @@ public class HUD : MonoBehaviour
         if (!LockOutFlag)
         {
             RightProtection = !RightProtection;
+            if (RightProtection)
+            {
+                RightDoor.GetComponent<Animator>().Play("DoorClose");
+            }
+            else
+            {
+                RightDoor.GetComponent<Animator>().Play("DoorOpen");
+            }
             Debug.Log(RightProtection);
         }
         else

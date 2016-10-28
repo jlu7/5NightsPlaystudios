@@ -35,7 +35,7 @@ public class MainGame : MonoBehaviour
 	    if (level == 1)
 	    {
 	        HUDController = transform.Find("HUD").GetComponent<HUD>();
-            HUDController.Initialize(1, SecurityCameras, tmp);
+            HUDController.Initialize(1, SecurityCameras, tmp, this.transform.Find("base_room/DoorLeft").gameObject, this.transform.Find("base_room/DoorRight").gameObject);
             foreach (Character chara in Characters)
 	        {
 	            chara.Initialize(HUDController, SecurityCameras);
@@ -102,7 +102,16 @@ public class MainGame : MonoBehaviour
                 }
             }
 
-            if (HUDController.LeftProtection || HUDController.RightProtection)
+            if (HUDController.LeftProtection)
+            {
+                EnergyUsage += 2;
+                if (PowerAmount > 0)
+                {
+                    PowerAmount = PowerAmount - 0.01f;
+                }
+            }
+
+            if (HUDController.RightProtection)
             {
                 EnergyUsage += 2;
                 if (PowerAmount > 0)
