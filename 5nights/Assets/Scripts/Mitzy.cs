@@ -32,7 +32,7 @@ public class Mitzy : Character
         pos2.ConnectingNodes.Add(pos1);
 
         pos4.ConnectingNodes.Add(pos1);
-        //pos4.ConnectingNodes.Add(pos6);
+        pos4.ConnectingNodes.Add(pos6);
 
         pos6.ConnectingNodes.Add(pos4);
 
@@ -95,14 +95,23 @@ public class Mitzy : Character
             }
             MitzyCurrentPos = MitzyCurrentPos.ConnectingNodes[targetNum];
             Debug.Log(MitzyCurrentPos.Position);
+            
+            if (MitzyCurrentPos.Position == 6)
+            {
+                SoundController.GetInstance().Play("PlayfulKnock");
+            }
+
             SecurityCamController.MoveCharacter(ThisActor, MitzyCurrentPos.Position);
         }
     }
 
     private IEnumerator GameOver()
     {
+        Active = false;
         HudController.LockOut();
         yield return new WaitForSeconds(1.0f);
+        SoundController.GetInstance().Play("DeathSound");
+        yield return new WaitForSeconds(10.0f);
         SceneManager.LoadScene("5nights");
     }
 }

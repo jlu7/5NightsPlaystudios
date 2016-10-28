@@ -29,7 +29,7 @@ public class ViewController : MonoBehaviour
         Views.Push(AnchorRef);
         GameObject FrontPage = Instantiate(Resources.Load<GameObject>("Prefabs/Views/TitlePage")) as GameObject;
         FrontPage.transform.SetParent(AnchorRef, false);
-
+        SoundController.GetInstance().Play("Theme");
         Views.Push(FrontPage.transform);
         //GameObject FrontPage = Instantiate(Resources.Load<GameObject>("CardDetail/CardDetail")) as GameObject;
     }

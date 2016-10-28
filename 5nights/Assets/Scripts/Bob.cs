@@ -33,7 +33,7 @@ public class Bob : Character
         pos3.ConnectingNodes.Add(pos5);
 
         pos5.ConnectingNodes.Add(pos3);
-        //pos5.ConnectingNodes.Add(pos6);
+        pos5.ConnectingNodes.Add(pos6);
 
         pos6.ConnectingNodes.Add(pos5);
 
@@ -108,8 +108,11 @@ public class Bob : Character
 
     private IEnumerator GameOver()
     {
+        Active = false;
         HudController.LockOut();
         yield return new WaitForSeconds(1.0f);
+        SoundController.GetInstance().Play("DeathSound");
+        yield return new WaitForSeconds(10.0f);
         SceneManager.LoadScene("5nights");
     }
 }

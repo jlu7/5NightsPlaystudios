@@ -31,6 +31,8 @@ public class SecurityCamController : MonoBehaviour
 
 	public void SetSecurityCam(int cameraNumber)
 	{
+        SoundController.GetInstance().Play("StaticCameraChange");
+        
 	    if (null != SecurityCameraArr[ActiveCam])
 	    {
             SecurityCameraArr[ActiveCam].SetActive(false);
