@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
@@ -24,7 +24,4 @@ public class MiniMap : MonoBehaviour {
 			RoomSprites[i].GetComponent<Button>().onClick.AddListener(() => SecurityCamController.SinglePoop.SetSecurityCam(count));
 		}
 	}
-
-
-
 }
