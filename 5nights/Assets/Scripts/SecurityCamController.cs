@@ -3,6 +3,9 @@ using System.Collections;
 
 public class SecurityCamController : MonoBehaviour
 {
+	public delegate void CameraChange(int activeCamera);
+	public static event CameraChange ActiveCameraChanged = (int ac) => { };
+
 
 	public int ActiveCam;
 	public GameObject[] SecurityCameraArr; 
@@ -24,5 +27,6 @@ public class SecurityCamController : MonoBehaviour
 			SecurityCameraArr[ActiveCam].SetActive(false);
 		ActiveCam = cameraNumber;
 		SecurityCameraArr[ActiveCam].SetActive(true);
+		ActiveCameraChanged(cameraNumber);
 	}
 }
